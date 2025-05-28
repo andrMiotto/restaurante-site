@@ -162,5 +162,10 @@ a {
 
 #descricaoPratosPrincipais{
     display: flex;
-    justify-content: center
+}
+
+
+#dadosPratosPrincipais{
+    display: flex;
+    flex-direction: row;
 }
