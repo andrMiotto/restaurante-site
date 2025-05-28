@@ -12,8 +12,7 @@ body {
 
 
 .logo img {
-    max-width: 100px;
-
+    max-width: 130px;
 }
 
 ul {
@@ -24,10 +23,8 @@ ul {
     margin: 0;
     padding: 0;
     color: black;
-
-
-
 }
+
 
 li {
     font-size: 20px;
@@ -95,8 +92,32 @@ a {
 }
 
 
-#principaisPratos p{
+#principaisPratos p {
     max-width: 50%;
     font-size: 15px;
 
 }
+
+.botoesDescricao {
+    position: absolute;
+    top: 500px;
+    color: rgb(210, 167, 86);
+    left: 1%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#reservarBotaoDescricao{
+    border: 2px solid rgb(210, 167, 86);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+#reservarBotaoDescricao:hover{
+    border: 2px solid rgb(255, 255, 255);
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+}
+
