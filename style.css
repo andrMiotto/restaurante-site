@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&family=Merriweather:opsz@18..144&display=swap');
 
 * {
-    font-family: "Merriweather", serif;
+    font-family: "Libre Baskerville", serif;
     padding: 0;
     margin: 0;
 }
@@ -30,10 +33,9 @@ li {
     font-size: 20px;
 }
 
-
-
 .pratosPrincipais {
     font-size: 50px;
+justify-content: center;
 }
 
 header {
@@ -47,6 +49,10 @@ header {
 .navbar {
     margin-left: auto;
     margin-right: 20px;
+}
+
+.navbar a:hover{
+color: white;
 }
 
 a {
@@ -98,6 +104,12 @@ a {
 
 }
 
+#principaisPratos h2    {
+    display: flex;
+    justify-content: center;
+}
+
+
 .botoesDescricao {
     position: absolute;
     top: 500px;
@@ -108,16 +120,47 @@ a {
     align-items: center;
 }
 
-#reservarBotaoDescricao{
+#reservarBotaoDescricao {
     border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
 }
 
-#reservarBotaoDescricao:hover{
+#reservarBotaoDescricao:hover {
     border: 2px solid rgb(255, 255, 255);
     padding: 8px;
     border-radius: 5px;
     color: white;
 }
 
+
+.reservaHeader a{
+    border: 2px solid rgb(210, 167, 86);
+    padding: 8px;
+    border-radius: 5px;
+
+}
+
+.reservaHeader a:hover {
+    border: 2px solid rgb(255, 255, 255);
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+}
+
+
+.conteudo {
+    display: flex;
+    flex-direction: row;
+}
+
+
+#videoSite {
+    max-width: 500px;
+}
+
+
+#descricaoPratosPrincipais{
+    display: flex;
+    justify-content: center
+}
