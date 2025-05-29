@@ -15,34 +15,32 @@ body {
 
 
 .logo img {
-    max-width: 130px;
+    min-width: 10px;
+    max-width: 90px;
 }
 
 ul {
-    list-style: none;
     display: flex;
     gap: 20px;
     align-items: center;
-    margin: 0;
-    padding: 0;
-    color: black;
+
 }
 
 
 li {
-    font-size: 20px;
+    font-size: 15px;
 }
 
-.pratosPrincipais {
-    font-size: 50px;
-justify-content: center;
+.TituloPratosPrincipais {
+    display: flex;
+    font-size: 35px;
+    justify-content: center;
 }
 
 header {
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.911);
-    padding: 10px;
 
 }
 
@@ -51,43 +49,49 @@ header {
     margin-right: 20px;
 }
 
-.navbar a:hover{
-color: white;
+.navbar a:hover {
+    color: white;
 }
 
-a {
+.navbar a {
     text-decoration: none;
     color: rgb(210, 167, 86);
 }
 
 
-
-#introducao h2 {
-    font-size: 50px;
-    position: absolute;
-    top: 22%;
-    left: 1%;
-    color: rgb(210, 167, 86);
-
-
+#introducao {
+    background-image: url(/Imagens/ImagemFundoIntroducao.png);
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 100%;
 }
 
 #introducao img {
-    height: 500px;
-    width: 100%;
-    object-fit: cover;
-    filter: brightness(40%);
+    filter: brightness(100%);
+
 }
 
-#descricaoIntroducao {
-    font-size: 20px;
-    position: absolute;
-    top: 300px;
-    left: 1%;
-    color: rgb(255, 255, 255);
+#introducao p {
+    color: white;
+    place-content: center space-between;
+    margin-top: 2%;
     max-width: 50%;
+    margin-left: 1%;
+}
 
+#introducao h2 {
+    color: rgb(210, 167, 86);
+    padding-top: 4%;
+    margin-left: 1%;
 
+}
+
+.botoesDescricao {
+    color: rgb(210, 167, 86);
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
 }
 
 #principaisPratos img {
@@ -104,26 +108,19 @@ a {
 
 }
 
-#principaisPratos h2    {
+#principaisPratos h2 {
     display: flex;
-    justify-content: center;
 }
 
 
-.botoesDescricao {
-    position: absolute;
-    top: 500px;
-    color: rgb(210, 167, 86);
-    left: 1%;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
+
 
 #reservarBotaoDescricao {
     border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
+    color: rgb(210, 167, 86);
+    text-decoration: none;
 }
 
 #reservarBotaoDescricao:hover {
@@ -134,7 +131,7 @@ a {
 }
 
 
-.reservaHeader a{
+.reservaHeader a {
     border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
@@ -150,8 +147,7 @@ a {
 
 
 .conteudo {
-    display: flex;
-    flex-direction: row;
+  flex-direction: row;
 }
 
 
@@ -160,12 +156,14 @@ a {
 }
 
 
-#descricaoPratosPrincipais{
-    display: flex;
-}
 
 
-#dadosPratosPrincipais{
+#dadosPratosPrincipais {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+}
+
+.colunaPratos1 {
+    display: flex;
 }
