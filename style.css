@@ -31,7 +31,7 @@ li {
 }
 
 .containerTitulo {
-    padding-left: 480px; 
+    padding-left: 480px;
 }
 
 .TituloPratosPrincipais {
@@ -39,6 +39,7 @@ li {
     color: rgb(210, 167, 86);
     margin-bottom: 10px;
 }
+
 header {
     display: flex;
     align-items: center;
@@ -154,7 +155,8 @@ header {
     padding-top: 30px;
     padding-right: 30px;
     justify-content: space-between;
-align-items: stretch;}
+    align-items: stretch;
+}
 
 
 #videoSite {
@@ -176,36 +178,37 @@ align-items: stretch;}
 }
 
 
-.Pratos{
+.Pratos {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-wrap: wrap;
-    flex:1;
-
-
+    border: 1px;
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 4px 7px gray;
 }
 
-.Pratos img{
-    min-height: 100px;
-    max-height: 500px;
-    min-width: 100px;
-    max-width: 400px;
-    width: 350px;
-    height: 310px;
+.Pratos img {
+    width: 400px;
+    height: 300px;
     object-fit: cover;
+    display: block;
 }
 
-.descricaoPratos{
+.descricaoPratos {
     display: flex;
-    max-width: 70%;
+    max-width: 80%;
+
 }
 
 
 footer {
     background-color: #f2f2f2;
     padding: 10px;
-    text-align:center;
+    text-align: center;
     font-family: Arial, sans-serif;
 }
 
@@ -216,7 +219,8 @@ footer .copyright p {
     color: #333;
 }
 
-aside{
+aside {
     display: block;
 }
+
 
