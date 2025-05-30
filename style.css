@@ -30,12 +30,15 @@ li {
     font-size: 15px;
 }
 
-.TituloPratosPrincipais {
-    display: flex;
-    font-size: 35px;
-    justify-content: center;
+.containerTitulo {
+    padding-left: 480px; 
 }
 
+.TituloPratosPrincipais {
+    font-size: 35px;
+    color: rgb(210, 167, 86);
+    margin-bottom: 10px;
+}
 header {
     display: flex;
     align-items: center;
@@ -151,11 +154,11 @@ header {
     padding-top: 30px;
     padding-right: 30px;
     justify-content: space-between;
-    align-items: first baseline;
-}
+align-items: stretch;}
 
 
 #videoSite {
+    display: flex;
     max-width: 500px;
 }
 
@@ -178,6 +181,7 @@ header {
     flex-direction: column;
     justify-content: space-between;
     flex-wrap: wrap;
+    flex:1;
 
 
 }
@@ -210,5 +214,9 @@ footer .contact-info p,
 footer .copyright p {
     margin: 10px 0;
     color: #333;
+}
+
+aside{
+    display: block;
 }
 
