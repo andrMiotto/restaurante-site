@@ -28,6 +28,12 @@ ul {
 
 li {
     font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+li:hover{
+   
 }
 
 .containerTitulo {
@@ -67,7 +73,7 @@ header {
     background-position: center;
     height: 300px;
     width: 100%;
-    
+
 }
 
 #introducao img {
@@ -98,10 +104,10 @@ header {
     align-items: baseline;
 }
 
-.chef:hover{
+.chef:hover {
     color: white;
-    padding:blue;
-    transform: scale(1.2); 
+    padding: blue;
+    transform: scale(1.2);
 
 }
 
@@ -137,20 +143,23 @@ header {
 }
 
 #reservarBotaoDescricao:hover {
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
     color: white;
-    transform: scale(1.2); 
+    background-color: rgb(210, 167, 86);
+    transform: scale(1.2);
 
 }
 
 
 .reservaHeader a {
-    border: 2px solid rgb(210, 167, 86);
+     border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
-    transform: scale(1.2); 
+    color: rgb(210, 167, 86);
+    text-decoration: none;
+    transition: transform 0.3s ease;
 
 }
 
@@ -160,7 +169,7 @@ header {
     border-radius: 5px;
     color: white;
     background-color: rgb(210, 167, 86);
-    transform: scale(1.2); 
+    transform: scale(1.2);
 
 }
 
@@ -203,8 +212,8 @@ header {
     transition: transform 0.3s ease;
 }
 
-.Pratos:hover{
-    transform: scale(1.2); 
+.Pratos:hover {
+    transform: scale(1.2);
 
 }
 
@@ -275,7 +284,7 @@ aside {
     justify-content: space-between;
 }
 
-.chef{
+.chef {
     text-decoration: none;
     color: rgb(210, 167, 86);
     place-content: center space-between;
@@ -285,14 +294,65 @@ aside {
 
 }
 
-.inputBox{
+.inputBox {
     position: relative;
 }
-.inputUser{
+
+.inputUser {
     background: none;
     border: none;
     border-bottom: 1px solid rgb(210, 167, 86);
     outline: none;
     color: grey;
-    
+
+}
+
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction:column;
+        align-items: flex-start; 
+        gap: 10px; 
+        padding: 10px;
+    }
+
+    .navbar button {
+        align-self: flex-start;
+        width: auto;
+        margin-top: 10px;
+    }
+
+    .conteudo {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .duplaPratos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Pratos {
+        max-width: 90%;
+        width: 100%;
+    }
+
+    #introducao p {
+        max-width: 90%;
+        font-size: 14px; /* Ou menor se quiser */
+    }
+
+    #introducao h1 {
+        font-size: 20px;
+    }
+
+    #introducao button {
+        width: 80%;
+        margin: 10px 0;
+    }
+
+    #videoSite {
+        width: 90%;
+        height: auto;
+    }
 }
