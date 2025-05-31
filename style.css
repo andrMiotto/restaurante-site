@@ -31,13 +31,12 @@ li {
 }
 
 .containerTitulo {
-    padding-left: 480px;
+    padding-left: 27%;
 }
 
 .TituloPratosPrincipais {
     font-size: 35px;
     color: rgb(210, 167, 86);
-    margin-bottom: 10px;
 }
 
 header {
@@ -68,6 +67,7 @@ header {
     background-position: center;
     height: 300px;
     width: 100%;
+    
 }
 
 #introducao img {
@@ -91,10 +91,18 @@ header {
 }
 
 .botoesDescricao {
+    display: flex;
     color: rgb(210, 167, 86);
     display: flex;
     gap: 20px;
     align-items: baseline;
+}
+
+.chef:hover{
+    color: white;
+    padding:blue;
+    transform: scale(1.2); 
+
 }
 
 #principaisPratos img {
@@ -124,6 +132,8 @@ header {
     border-radius: 5px;
     color: rgb(210, 167, 86);
     text-decoration: none;
+    transition: transform 0.3s ease;
+
 }
 
 #reservarBotaoDescricao:hover {
@@ -131,6 +141,8 @@ header {
     padding: 8px;
     border-radius: 5px;
     color: white;
+    transform: scale(1.2); 
+
 }
 
 
@@ -138,14 +150,18 @@ header {
     border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
+    transform: scale(1.2); 
 
 }
 
 .reservaHeader a:hover {
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
     color: white;
+    background-color: rgb(210, 167, 86);
+    transform: scale(1.2); 
+
 }
 
 
@@ -156,27 +172,19 @@ header {
     padding-right: 30px;
     justify-content: space-between;
     align-items: stretch;
+    width: 80%;
+    margin: 0 auto;
+    gap: 30px;
 }
 
 
 #videoSite {
     display: flex;
     max-width: 500px;
+    border: 2px solid rgb(210, 167, 86);
+    padding: 8px;
+    border-radius: 20px;
 }
-
-
-
-
-#dadosPratosPrincipais {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-}
-
-.colunaPratos1 {
-    display: flex;
-}
-
 
 .Pratos {
     display: flex;
@@ -188,11 +196,21 @@ header {
     overflow: hidden;
     box-sizing: border-box;
     background-color: white;
-    box-shadow: 4px 7px gray;
+    box-shadow: -1px -1px 9px gray;
+    width: 35%;
+    flex: 1 1 35%;
+    gap: 15px;
+    transition: transform 0.3s ease;
 }
 
+.Pratos:hover{
+    transform: scale(1.2); 
+
+}
+
+
 .Pratos img {
-    width: 400px;
+    width: 100%;
     height: 300px;
     object-fit: cover;
     display: block;
@@ -220,7 +238,61 @@ footer .copyright p {
 }
 
 aside {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 
+.duplaPratos {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    flex: 2;
+}
+
+.horarioFuncionamento {
+    border: 2px solid rgb(210, 167, 86);
+    padding: 8px;
+    border-radius: 5px;
+    color: rgb(210, 167, 86);
+    text-decoration: none;
+}
+
+.formulario {
+    border: 2px solid rgb(210, 167, 86);
+    padding: 8px;
+    border-radius: 5px;
+    color: rgb(210, 167, 86);
+    text-decoration: none;
+}
+
+
+.horario {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chef{
+    text-decoration: none;
+    color: rgb(210, 167, 86);
+    place-content: center space-between;
+    margin-top: 1%;
+    margin-left: 1%;
+    transition: transform 0.3s ease;
+
+}
+
+.inputBox{
+    position: relative;
+}
+.inputUser{
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgb(210, 167, 86);
+    outline: none;
+    color: grey;
+    
+}
