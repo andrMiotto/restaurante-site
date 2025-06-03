@@ -15,6 +15,13 @@ body {
 .logo img {
     min-width: 10px;
     max-width: 90px;
+    transition: transform 0.3s ease;
+
+}
+
+.logo img:hover {
+    transform: scale(1.2);
+
 }
 
 ul {
@@ -30,10 +37,6 @@ li {
     font-size: 15px;
     text-decoration: none;
     transition: transform 0.3s ease;
-}
-
-li:hover{
-   
 }
 
 .containerTitulo {
@@ -154,7 +157,7 @@ header {
 
 
 .reservaHeader a {
-     border: 2px solid rgb(210, 167, 86);
+    border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
     color: rgb(210, 167, 86);
@@ -213,7 +216,7 @@ header {
 }
 
 .Pratos:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 
 }
 
@@ -271,11 +274,19 @@ aside {
 }
 
 .formulario {
+    display: flex;
     border: 2px solid rgb(210, 167, 86);
     padding: 8px;
     border-radius: 5px;
     color: rgb(210, 167, 86);
     text-decoration: none;
+    justify-content: space-between;
+}
+
+form {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
 }
 
 
@@ -303,15 +314,15 @@ aside {
     border: none;
     border-bottom: 1px solid rgb(210, 167, 86);
     outline: none;
-    color: grey;
+    color: gray;
 
 }
 
 @media (max-width: 768px) {
     .navbar ul {
-        flex-direction:column;
-        align-items: flex-start; 
-        gap: 10px; 
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
         padding: 10px;
     }
 
@@ -339,7 +350,7 @@ aside {
 
     #introducao p {
         max-width: 90%;
-        font-size: 14px; /* Ou menor se quiser */
+        font-size: 14px;
     }
 
     #introducao h1 {
@@ -356,3 +367,59 @@ aside {
         height: auto;
     }
 }
+
+.estrelas {
+    color: gray;
+    cursor: pointer;
+}
+
+.estrelas:hover {
+    color: rgba(255, 217, 0, 0.281);
+}
+
+.estrelas:active {
+    color: gold;
+}
+
+
+.avaliacoes {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.imagemPerfil{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgb(210, 167, 86);
+}
+
+.containerComentarios {
+    display: flex;
+    gap: 20px;
+}
+
+.comentario{
+    display: flex;
+    border: 2px solid rgb(210, 167, 86);
+    padding: 8px;
+    border-radius: 5px;
+    color: rgb(210, 167, 86);
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 1px 3px 9px gray;
+    flex-direction: row-reverse;
+    flex: 2;
+    justify-content: flex-end;
+    width: 25%;
+    
+}
+
+
+.comentario:hover{
+    transform: scale(1.1);
+}
+
