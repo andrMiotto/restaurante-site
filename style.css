@@ -386,9 +386,10 @@ form {
     display: flex;
     align-items: center;
     flex-direction: column;
-    
+
 }
-.imagemPerfil{
+
+.imagemPerfil {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -401,7 +402,7 @@ form {
     gap: 20px;
 }
 
-.comentario{
+.comentario {
     display: flex;
     border: 2px solid rgb(210, 167, 86);
     padding: 8px;
@@ -415,11 +416,41 @@ form {
     flex: 2;
     justify-content: flex-end;
     width: 25%;
-    
+
 }
 
 
-.comentario:hover{
+.comentario:hover {
     transform: scale(1.1);
 }
 
+.textosAvaliacao {
+    margin-left: 7px;
+}
+
+.tituloAvaliacoes {
+    font-size: 35px;
+    color: rgb(210, 167, 86);
+}
+
+.receberNoticias {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button{
+    background-color: rgb(210, 167, 86); 
+    color: white; 
+    padding: 1px 2px; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+button:hover{
+    background-color: rgba(210, 167, 86, 0.849); 
+
+}
