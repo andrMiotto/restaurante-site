@@ -1,0 +1,485 @@
+﻿(function ($) {
+    $(function () {
+        window.fsu = window.fsu || {}
+        // Prevent FSU from opening on mobile web view
+        if (window.IsMobileApp) {
+            var loadFrameDelay = 0; //0 = disabled
+            $('.fsu_btn-toggle').on('click', function () {
+                var data = {
+                    "type": "NAVIGATION",
+                    "payload": {
+                        "access_token": null,
+                        "refresh_token": null,
+                        "pageTitle": document.title,
+                        "navigateTo": 'login',
+                        "expire_in": 86400
+                    }
+                }
+                console.info('calling native app support', data);
+                try {
+                    window.webkit.messageHandlers.nativeProcess.postMessage(data);
+                } catch (error) {
+                    console.error('Failed to open native app support', error)
+                }
+            })
+
+        } else {
+            var loadFrameDelay = 20000; //20 sec
+        }
+
+        var rootPath = "//" + window.location.hostname + "/mychristies";
+
+        var param = "";
+        var tagParam = "";
+        var hrefPath = "";
+        var urlPath = "";
+        var t;
+        var HidePopuponMSLP = 1;
+        var $overlayHeight = 0;
+        var _clearTimeout = 0;
+
+        hrefPath = window.location.href.toLowerCase();
+        urlPath = window.location.pathname.toLowerCase();
+
+
+        if ($('#iSignUp').length > 0) {
+            $('#iSignUp').css('visibility', 'hidden');
+        }
+
+        $('body').on('dragstart drop', 'img', function (e) {
+            e.preventDefault();
+            return false;
+        });
+
+        $('body').on('contextmenu', 'img', function (e) {
+            e.preventDefault();
+            return false;
+        });
+
+        //EM - Webz-175 - 8/11/2020	
+
+        var CurrentDate = new Date();
+        var FSUCookieValue = CurrentDate.toISOString();
+        var ShowFSU = false;
+        function setCookie(cname, cvalue, exdays, IsSessionCookie) {
+            //we check that functional cookies have been allowed. 3 = functional per OneTrust configuration
+            if (typeof (_satellite) != 'undefined') {
+                if (_satellite.getVar('ACR OptanonActiveGroups').indexOf('3') !== -1) {
+                    var cookieDomain = '';
+                    var d = new Date();
+                    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+                    var expires = "expires=" + d.toUTCString();
+                    if (IsSessionCookie) {
+                        expires = '';
+                    }
+                    cookieDomain = ";path=/";
+                    document.cookie = cname + "=" + cvalue + "; " + expires + cookieDomain;
+                }
+            }
+
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return null;
+        }
+
+        if (getCookie("FastSignup") == "FastSignupCreated") {
+            setCookie("FastSignup", FSUCookieValue, 365, false);
+        }
+
+        if (getCookie("FastSignup") != null) {
+            var d = new Date(getCookie("FastSignup"));
+            var cookieTime = getMinutesBetweenDates(d, CurrentDate);
+            if (cookieTime >= 96) { //Check if Cookie session is greater than equal to 4 days check is done in hours...set to hour 1 for testing...deployment value should be 96hr = 4days
+                ShowFSU = true;
+                //Update the cookie date time...
+                setCookie("FastSignup", FSUCookieValue, 365, false);
+                //Update cookie date
+            }
+        } else {
+            ShowFSU = true;
+        }
+        //EM - Webz-175 - 8/11/2020
+
+        //If user is logged in check cookie value of optoutemail and reset popup values.
+        var optoutemail = 'Y';
+        var ClientGUID = "";
+
+        if (getCookie("AccessToken") != null) {  //WEBZ-4547
+            ClientGUID = getWebClientIdUsingAccessToken();
+            if (optoutemail == 'Y') { //EM - Webz-175 - 8/11/2020
+                ShowFSU = false; //EM - Webz-175 - 8/11/2020
+                clearInterval(t);
+            }
+        }
+
+
+
+        //If user has already signed up to receive emails, update msg
+        if (getCookie("SignedUp") == "True") {
+            signedUpMsg();
+            ShowFSU = false; //EM - Webz-175 - 8/11/2020
+        }
+
+        // Clicking a sign up button on a page
+        $(".fsu_btn-toggle").on("click", (function (event) {
+            var dataTypeCode = window.fsu.dataType = $(this).attr("data-typecode");
+            window.fsu.location = $(this).attr("data-location");
+            window.fsu.btnText = $(this).text();
+            window.fsu.isLoggedIn = ClientGUID != ""
+            window.fsu.fromClick = true
+            if (window.IsMobileApp) { return }
+            event.preventDefault();
+
+
+
+            // For some browsers, `attr` is undefined; for others, `attr` is false.  Check for both.
+            if (typeof location == 'undefined' || location == false) {
+                location = '';
+            }
+            if (typeof btnText == 'undefined' || btnText == false) {
+                btnText = '';
+            }
+
+            if (ClientGUID != "") {
+                //User is logged in
+                CreateProspectClientLoggedInUser($(this).attr("data-pageurl"), $(this).attr("data-id"), dataTypeCode, ClientGUID, 1);
+                signedUpMsg();
+
+                // setAnalytics(true, dataTypeCode, location, btnText)
+            } else {
+
+                if (dataTypeCode == "DEP" || dataTypeCode == "ART") {
+                    tagParam = "&tag_tid=" + $(this).attr("data-tag-id") + "&tag_url=" + hrefPath + "&tag_language=" + $(this).attr("data-tag-language");
+                }
+                if ($(this).attr("data-id") == "" && hrefPath.indexOf('multidaysales') >= 0)
+                    param = "?tid=" + $(this).attr("data-id") + "&stid=" + dataTypeCode + "&url=" + hrefPath + "&loggedIn=Y";
+                else if ($(this).attr("data-id") == "" && hrefPath.indexOf('onlineonly') >= 0)
+                    param = "?tid=" + $(this).attr("data-id") + "&stid=" + dataTypeCode + "&url=&loggedIn=Y";
+                else if ($(this).attr("data-depname") != undefined)
+                    param = "?tid=" + $(this).attr("data-id") + "&stid=" + dataTypeCode + "&url=&depname=" + $(this).attr("data-depname");
+                else
+                    param = "?tid=" + $(this).attr("data-id") + "&stid=" + dataTypeCode + "&url=";
+                if (tagParam != '')
+                    param = param + tagParam;
+
+                clearInterval(t);
+                ClearCookie();
+                // moving analytics call to the function that loads the fsu
+                //  setAnalytics(false, dataTypeCode, location, btnText)
+                framesetup(1);
+            }
+
+        }));
+
+        //If user is coming from marketing email link with 'christiesmarketing=y' then don't show fast sign uppopups
+        if ((hrefPath.indexOf('cid=dm') > 0) || (hrefPath.indexOf('cid=em_eml') > 0)) {
+            //EM - Webz-175 - 8/11/2020
+            ShowFSU = false;
+        }
+
+        if (typeof (HideSignupPop) != 'undefined' && HideSignupPop !== null && HideSignupPop !== undefined) {
+            HidePopuponMSLP = HideSignupPop;
+        }
+
+        //Exclude Chinese versions and check how many times the screen has loaded for this user
+        if (((urlPath.indexOf('zh') < 0) && (urlPath.indexOf('zh-cn') < 0)) &&
+            urlPath.indexOf('login') <= 0 &&
+            urlPath.indexOf('anonymous-live-viewing') <= 0 &&
+            urlPath.indexOf('emailconfirmation') <= 0 &&
+            urlPath.indexOf('technicaldifficulties') < 0 &&
+            urlPath.indexOf('my_settings_retrieve_password') < 0 &&
+            hrefPath.indexOf('artist') <= 0 &&
+            urlPath.indexOf('multidaysales') <= 0 &&
+            urlPath.indexOf('mychristies') <= 0 &&
+            urlPath.indexOf('mobile') <= 0 &&
+            urlPath.indexOf('mob-is-app') <= 0 &&
+            urlPath.indexOf('/auctions/watch-live') <= 0 &&
+            urlPath.indexOf('/newhome') <= 0 &&
+            HidePopuponMSLP != 0 &&
+            (ShowFSU == true)) { //EM - Webz-175 - 8/11/2020
+            // ($.cookie("FastSignup") != "FastSignupCreated" && optoutemail == 'Y')) { //EM - Webz-175
+            //run the interval which will fire the function that can open the signup form
+            window.fsu.fromClick = false
+            framesetup(loadFrameDelay);
+        } else {
+            //console.log('not opening fsu');
+        }
+
+        //WEBZ-4547
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            return JSON.parse(jsonPayload);
+        };
+
+        function getWebClientIdUsingAccessToken() {
+            var clientGUID = "";
+            if (document.cookie != undefined && document.cookie != '') {
+                var cookieList = document.cookie.split(';');
+                if (cookieList.length > 0) {
+                    var accessTokenCookie = cookieList.find(element => element.toLowerCase().includes('access_token'));
+                    if (accessTokenCookie != undefined && accessTokenCookie.length > 0) {
+                        var cookieAT = accessTokenCookie.split('=');
+                        cookieAT = cookieAT.reverse();
+                        var token = cookieAT[0];
+                        var jwtObj = parseJwt(token);
+                        var keysList = Object.keys(jwtObj);
+                        var accessKey = keysList.find(item => item.toLowerCase().includes('client-guid'));
+                        if (accessKey != undefined && accessKey != '') {
+                            clientGUID = jwtObj[accessKey];
+                        }
+                    }
+                }
+            }
+
+            return clientGUID;
+        }
+
+        function framesetup(loadFrameDelay) {
+            if (loadFrameDelay === 0) { return } //0 = disable
+            //Perform a check to see if #dialog exists and if it does check to see if it's open.
+            //If it does not exists, or if it does exist and is not open than run the openFrame() function
+            t = setInterval(function () {
+                //Does #dialog exist?
+                //console.log('testing for dialog');
+                if ($('#dialog').length > 0) {
+                    //console.log('dialog exists');
+                    //It does, but is it open?
+                    if (($('#dialog').position().left <= 0) || ($('#dialog').height() < 1)) {
+                        //console.log('dialog is not open');
+                        //It's not, so run this function:
+                        openFrame();
+                    } else {
+                        //console.log('dialog is open');
+                    }
+                } else {
+                    //console.log("dialog doesn't exists");
+                    //#dialog doesn't exist. Is the element with backgroundPopup hidden?
+                    if ($('.backgroundPopup:hidden')) {
+                        //console.log('backgroundpopup is hidden');
+                        //It is, so run this function:
+                        openFrame();
+                    }
+                }
+            }, loadFrameDelay);
+        }
+
+        function adjustPopup() {
+            if (($('.backgroundPopup:hidden')) || (($('#dialog').position().left <= 0) || ($('#dialog').height() < 1))) {
+                clearTimeout(_clearTimeout);
+                _clearTimeout = setTimeout(function () {
+                    $('#iSignUp, #signupFrame').show();
+                    $('.fsu--christies_loader').hide();
+                    //console.log('fsu-loader -- hidden');
+                }, 700);
+            }
+        }
+
+        function openFrame() {
+            clearInterval(t);
+            var isOtherModalOpen = $('body').hasClass('modal-open') || $('body').hasClass('modalOpen') || $('body').hasClass('fsuActive')
+            if (!isOtherModalOpen) {
+                getSignUpPage();
+                //EM - Webz-175 - 8/11/2020 - Create cookie if it null
+                if (getCookie("FastSignup") == null) {
+                    setCookie("FastSignup", FSUCookieValue, 365, false);
+                }
+                //EM - Webz-175 - 8/11/2020
+
+                $('html, body').addClass('fsuActive');
+                $('#iSignUp, #signupFrame').addClass('fsu-active');
+
+                if (($('.backgroundPopup:hidden')) || (($('#dialog').position().left <= 0) || ($('#dialog').height() < 1))) {
+                    adjustPopup();
+                }
+            }
+        }
+
+        function getSignUpPage() {
+            var signupFramePath = rootPath + "/SignupAjax.aspx" + param;
+            var $markup = '<div id="iSignUp" class="fsu--christies"></div>';
+            $markup += '<div class="fsu--christies_overlay">';
+            $markup += '<span class="fsu--christies_loader"><span class="fsu--christies--loader_inner"></span></span>';
+            $markup += '</div>';
+
+            $overlayHeight = ($('#container').length == 0 ? ($('#mainform').outerHeight() + $('.chr-header-footer').find('.container-fluid').outerHeight()) : $('#container').outerHeight() + $('.chr-header-footer').find('.container-fluid').outerHeight());
+
+            if ($('#iSignUp').length > 0) {
+                $('#iSignUp').remove();
+                $('body').append($markup);
+            } else {
+                $('body').append($markup);
+            }
+
+            $('.fsu--christies_overlay').css({
+                'height': '100vh'
+            });
+
+            $('.fsu--christies_loader').show();
+            $("#iSignUp").hide().load(signupFramePath);
+
+            //Add analytics call here
+            if (typeof s_gi != "undefined") {
+                setAnalytics()
+            }
+
+        }
+
+        function CloseFrame() {
+            //console.log('lfsu - closing step 1');
+
+            if (getCookie("SignedUp") == "True") {
+                signedUpMsg();
+            }
+
+            clearInterval(t);
+            return false;
+        }
+
+        function ClearCookie() {
+            setCookie('FastSignup','',365,false)
+        }
+
+        function signedUpMsg() {
+            //User has successfully signed up
+            //WEBZ-4664
+            var thankYouMsg;
+
+            if (jQuery.cookie("CurrentLanguage") != null) {
+                if (jQuery.cookie("CurrentLanguage").toLowerCase() == "en") {
+                    thankYouMsg = "Thank you for signing up.";
+                }
+                else if (jQuery.cookie("CurrentLanguage").toLowerCase() == "zh") {
+                    thankYouMsg = "感谢您登记账户";
+                }
+                else if (jQuery.cookie("CurrentLanguage").toLowerCase() == "zh-cn") {
+                    thankYouMsg = "感谢您登记账户";
+                }
+                else {
+                    thankYouMsg = "Thank you for signing up.";
+                }
+            }
+            $(".fsu_btn-toggle").removeAttr("style");
+            $(".fsu_btn-toggle").html("<i><b><font color='red'>" + thankYouMsg + "</font></b></i>");
+            $(".fsu_btn-toggle").addClass("fsu_header-5_primary");
+            $(".fsu_btn-toggle").removeProp("style");
+            $(".fsu_btn-toggle").removeClass("fsu_btn");
+            $(".fsu_btn-toggle").css("pointer-events", "none");
+            $(".fsu_btn-toggle").removeClass("fsu_btn-toggle");
+        }
+
+        function CreateProspectClientLoggedInUser(PageURL, BasedOnID, TypeCode, ClientID, LanguageID) {
+            var param = "?param='" + PageURL + ',' + BasedOnID + ',' + TypeCode + ',' + ClientID + ',' + LanguageID;
+            if ($("#signupFrame").attr("src") == '') {
+                $("#signupFrame").attr("src", rootPath + "/SignupAjax.aspx" + param + "&LoggedInUser=Y");
+            }
+        }
+
+        // Send analytics for the opening of the FSU
+        function setAnalytics() {
+            var type = window.fsu.dataType || '';
+            var location = window.fsu.location || '';
+            var btnText = window.fsu.btnText || ''
+            var isLoggedIn = window.fsu.isLoggedIn || '';
+
+            // Checking with Victoria on where these values would be sent through
+            var eventType = isLoggedIn ? { "fsu_submit": true } : { "fsu_load": true }
+
+            var omnitureValue = '';
+            // TWS-3193
+            var performanceCheck = setInterval(function () {
+                if (typeof (s) != 'undefined') {
+                    if (_satellite.getVar("ACR OptanonActiveGroups").indexOf("2") !== -1) {
+                        if (typeof (_omnitureEnv) === 'undefined') {
+                            var s = s_gi((window.parent.location.href.indexOf('www.christies.com') > 0) ? s_gi('christieslaunchdev') : s_gi('christiesprod'));
+                        } else {
+                            var s = s_gi(_omnitureEnv);
+                        }
+                        // By default we will always want s.eVar55
+                        s.linkTrackVars = 'eVar55'
+                        // Clearing events and evars from any previous AA calls
+                        s.clearVars();
+
+                        if (type == "DEP") {
+                            omnitureValue = 'Email Only Sign-Up- Department Page';
+                            s.linkTrackVars = 'eVar55,eVar33,prop33,prop34';
+                            s.eVar33 = 'Departments-Email Sign Up';
+                            s.prop33 = s.eVar33;
+                            s.prop34 = 'Departments'
+                        }
+
+                        if (type == "ART") {
+                            omnitureValue = 'stories:article:' + location;
+                            // This top part of the condition is from the Adobe Launch rule: EBR|(DTM)-Feature Page - Left Rail- FSU|AA which I have disabled
+                            if (window.fsu.location == 'sidebar' && window.fsu.fromClick) {
+                                s.linkTrackVars = 'eVar55,eVar33,prop33,prop34,prop38';
+                                s.eVar33 = 'Feature-Left Rail-Sign Up Now';
+                                s.prop33 = s.eVar33;
+                                s.prop34 = 'Feature-Left Rail';
+                                s.prop38 = 'Email Sign Up Module';
+                            } else {
+                                s.linkTrackVars = 'eVar55';
+                            }
+                        }
+
+                        if (window.location.href.indexOf("art-and-tech") > -1) { omnitureValue = 'Art Tech' }
+
+                        if (isLoggedIn) {
+                            // If the user is already logged in, we can count that as a successful sign up
+                            if (window.fsu.fromClick) {
+                                s.events = "event82, event33";
+                                s.linkTrackEvents = "event82, event33"
+                            } else {
+                                s.events = "event82";
+                                s.linkTrackEvents = "event82"
+                            }
+                        } else {
+                            if (window.fsu.fromClick) {
+                                s.events = "event81, event33";
+                                s.linkTrackEvents = "event81, event33"
+                            } else {
+                                s.events = "event81";
+                                s.linkTrackEvents = "event81"
+                            }
+                        }
+
+                        // Setting eVar55 value
+                        if (window.fsu.fromClick) {
+                            s.eVar55 = omnitureValue;
+                        } else {
+                            s.eVar55 = ' Fast Sign Up Lightbox from codebase'
+                        }
+
+                        // Call the function that sends the data to analytics
+                        s.tl(this, 'o', btnText);
+                        // Clearing the events and evars
+                        s.clearVars();
+                    }
+                    clearInterval(performanceCheck);
+                }
+            }, 200);
+        }
+
+
+        //EM - Webz-175 - 8/11/2020
+        function getMinutesBetweenDates(startDate, endDate) {
+
+            var diff = endDate.valueOf() - startDate.valueOf();
+            var diffInHours = diff / 1000 / 60 / 60; // 
+            return diffInHours;
+        }
+        //EM - Webz-175 - 8/11/2020
+    });
+})(jQuery);

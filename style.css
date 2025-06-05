@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Handlee&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&family=Merriweather:opsz@18..144&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&family=Merriweather:opsz@18..144&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 * {
-    font-family: "Libre Baskerville", serif;
+    font-family: "Montserrat", sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -13,7 +13,7 @@ body {
 
 
 .logo img {
-    min-width: 10px;
+    min-width: 100px;
     max-width: 90px;
     transition: transform 0.3s ease;
 
@@ -51,7 +51,6 @@ li {
 header {
     display: flex;
     align-items: center;
-    background-color: rgb(0, 0, 0);
 
 
 }
@@ -81,9 +80,15 @@ header {
 }
 .textoIntroducao{
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     gap:20px;
+}
+
+.textoIntroducao h2{
+   font-size: 26px;
+   font-family: mont;
 }
 
 #introducao img {
@@ -94,7 +99,6 @@ header {
 #introducao p {
     color: white;
     place-content: center space-between;
-    margin-top: 2%;
     max-width: 50%;
     margin-left: 1%;
 }
@@ -109,9 +113,9 @@ header {
 .botoesDescricao {
     display: flex;
     color: rgb(210, 167, 86);
-    display: flex;
     gap: 20px;
-    align-items: baseline;
+    align-items:stretch;
+
 }
 
 .chef:hover {
@@ -144,17 +148,21 @@ header {
 
 #reservarBotaoDescricao {
     border: 2px solid rgb(210, 167, 86);
-    padding: 8px;
+    padding: 8px 16px;
     border-radius: 5px;
     color: rgb(210, 167, 86);
     text-decoration: none;
     transition: transform 0.3s ease;
+    text-align: center;
+    display:inline-flex;
+    white-space: nowrap; 
+
 
 }
 
 #reservarBotaoDescricao:hover {
     border: 2px solid rgb(210, 167, 86);
-    padding: 8px;
+    padding: 8px 16px;
     border-radius: 5px;
     color: white;
     background-color: rgb(210, 167, 86);
@@ -243,17 +251,72 @@ header {
 
 
 footer {
-    background-color: #f2f2f2;
-    padding: 10px;
-    text-align: center;
-    font-family: Arial, sans-serif;
+    background-color: #0b0e1a; 
+    color: #fff;
+    padding: 40px 20px 20px;
 }
 
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-footer .contact-info p,
-footer .copyright p {
-    margin: 10px 0;
-    color: #333;
+.footer-coluna {
+    flex: 1 1 200px;
+}
+
+.footer-coluna h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: rgb(210, 167, 86);
+}
+
+.footer-coluna ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-coluna ul li {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.footer-coluna ul li a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer-coluna ul li a:hover {
+    color: rgb(210, 167, 86);
+}
+
+.footer-logo {
+    max-width: 120px;
+    margin-bottom: 10px;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.footer-social a:hover {
+    color: rgb(210, 167, 86);
+}
+
+.footer-direitos {
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    font-size: 14px;
+    color: #aaa;
 }
 
 aside {
@@ -271,6 +334,8 @@ aside {
     width: 100%;
     flex: 2;
 }
+
+
 
 .horarioFuncionamento {
     border: 2px solid rgb(210, 167, 86);
@@ -461,3 +526,23 @@ button:hover{
     background-color: rgba(210, 167, 86, 0.849); 
 
 }
+
+.headerDestinos{
+    background-color: black;
+}
+
+
+.cardapioTitulo{
+    display: flex;
+    justify-content: center;
+}
+
+.tipoCardapio {
+    flex: 0 0 100%;
+    text-align: center;
+    margin: 20px 0 10px; 
+    font-size: 2rem;              
+    color: rgb(210, 167, 86);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
