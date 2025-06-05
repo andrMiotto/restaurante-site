@@ -51,7 +51,8 @@ li {
 header {
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.911);
+    background-color: rgb(0, 0, 0);
+
 
 }
 
@@ -74,9 +75,15 @@ header {
     background-image: url(/Imagens/ImagemFundoIntroducao.png);
     background-size: cover;
     background-position: center;
-    height: 300px;
+    height: 650px;
     width: 100%;
 
+}
+.textoIntroducao{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap:20px;
 }
 
 #introducao img {
