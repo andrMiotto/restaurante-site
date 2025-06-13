@@ -555,13 +555,83 @@ button:hover {
     color: rgb(210, 167, 86);
 }
 
-.contato {
+/* ========================================================================== 
+   CONTATO
+========================================================================== */
+
+.mainContato{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+}
+.contato-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 50px;
+    background-color: #f8f8f8;
+    flex-wrap: wrap;
 }
 
 .imagemContato img {
-    height: 600px;
-    width: 40%;
-    object-fit: contain;
+    width: 100%;
+    max-width: 750px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+}
+
+.formularioContato {
+    flex: 1 1 350px;
+    max-width: 450px;
+    background-color: white;
+    padding: 30px;
+    border: 2px solid rgb(210, 167, 86);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.inputBoxContato {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+
+
+.inputUserContato {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid rgb(210, 167, 86);
+    background: transparent;
+    outline: none;
+    font-size: 15px;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.inputUserContato:focus {
+    border-color: #b68e3e;
+}
+
+.botaoEnviar {
+    padding: 12px;
+    width: 100%;
+    border: none;
+    background-color: rgb(210, 167, 86);
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.botaoEnviar:hover {
+    background-color: #b68e3e;
+    transform: scale(1.02);
 }
