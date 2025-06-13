@@ -37,7 +37,6 @@
 | **Início**  | Imagem de destaque ocupando a tela cheia, com nome e slogan do restaurante |
 | **Sobre**   | Breve descrição da história e proposta do restaurante                      |
 | **Cardápio**| Lista de pratos organizados em colunas com nomes, descrições e preços      |
-| **Galeria** | Grade com imagens de pratos e ambiente do restaurante                      |
 | **Contato** | Formulário para envio de mensagens (não funcional)                         |
 
 ---
@@ -52,21 +51,10 @@ O layout se adapta a diferentes tamanhos de tela utilizando:
 
 ---
 
-## 📌 Melhorias Futuras
-
-- [ ] Validação do formulário com JavaScript
-- [ ] Funcionalidade real de envio de mensagens (backend)
-- [ ] Integração com mapa (Google Maps)
-- [ ] Navegação com menu responsivo (hambúrguer)
-- [ ] Otimização para SEO e acessibilidade
-
----
-
 ## 👨‍💻 Autor
 
 Desenvolvido por **André Miotto**
 
-- GitHub: [@andre-miottos-projects](https://github.com/andre-miottos-projects)
 - Projeto hospedado na [Vercel](https://vercel.com)
 
 ---
