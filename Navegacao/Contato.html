@@ -1,28 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
 
-    <title>Document</title>
+    <title>L’Étoile d’Or</title>
 </head>
-<body>
-    <header class="headerDestinos">
-        <div class="logo"><img src="/Imagens/logo.png" alt=""></div>
-        <div class="navbar">
-            <nav>
-                <ul>
-                    <li class="home"><a href="/index.html">Home</a></li>
-                    <li class="cardapio"><a href="/Navegacao/Cardapio.html">Cardápio</a></li>
-                    <li class="sobre"><a href="/Navegacao/Sobre.html">Sobre</a></li>
-                    <li class="contato"><a href="/Navegacao/Contato.html">Contato</a></li>
-                    <li class="reservaHeader"><a href="/Navegacao/Reserva.html">Reservar Mesa</a></li>
 
-                </ul>
-            </nav>
+<body>
+    <main>
+
+        <header class="headerDestinos">
+            <div class="logo"><img src="/Imagens/logo.png" alt=""></div>
+            <div class="navbar">
+                <nav>
+                    <ul>
+                        <li class="home"><a href="/index.html">Home</a></li>
+                        <li class="cardapio"><a href="/Navegacao/Cardapio.html">Cardápio</a></li>
+                        <li class="sobre"><a href="/Navegacao/Sobre.html">Sobre</a></li>
+                        <li class="contato"><a href="/Navegacao/Contato.html" class="active">Contato</a></li>
+                        <li class="reservaHeader"><a href="/Navegacao/Reserva.html">Reservar Mesa</a></li>
+
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+
+        <div class="contato">
+            <div class="imagemContato"><img src="/Imagens/jacquin.png" alt=""></div>
+
+
+
+
+
+
+            <div class="formulario">
+                <form action="/enviar">
+
+                    <legend> <b>Reserva de Mesa</b></legend>
+                    <br>
+
+                    <div class="inputBox">
+                        <input type="text" name="nome" id="nome" class="inputUser" required
+                            placeholder="Nome completo:">
+                    </div>
+
+                    <div class="inputBox">
+                        <input type="email" name="email" id="email" class="inputUser" required placeholder="Email:">
+                    </div>
+
+                    <div class="inputBox">
+                        <input type="tel" name="telefone" id="telefone" class="inputUser" required
+                            placeholder="Telefone:">
+
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="horarioReserva">Horário:</label>
+                        <br>
+                        <input type="time" name="horarioReserva" id="horarioReserva" class="inputUser" required>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="dataReserva">Data:</label>
+                        <br>
+                        <input type="date" name="dataReserva" id="dataReserva" class="inputUser" required>
+                    </div>
+
+                    <div class="inputBox">
+                        <input type="number" name="numeroPessoas" id="numeroPessoas" class="inputUser" required
+                            placeholder="Número de pessoas">
+                    </div>
+
+                    <button type="submit">Enviar</button>
+
+                </form>
+
+            </div>
+
+
         </div>
-    </header>
+
+
+
+
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col marca">
+                <img src="/Imagens/imagemLogo.png" alt="Logo da Empresa" class="footer-logo">
+                <p>Cozinhar é transformar memória em sabor, com delicadeza e intenção.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-coluna">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Cardápio</a></li>
+                    <li><a href="#">Sobre</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Reservas</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-coluna">
+                <h4>Funcionamento</h4>
+                <ul>
+                    <li>Ter - Qui: <strong>12h00 - 22h00</strong></li>
+                    <li>Sex - Sáb: <strong>12h00 - 23h00</strong></li>
+                    <li>Domingo: <strong>12h00 - 16h00</strong></li>
+                </ul>
+            </div>
+
+            <div class="footer-coluna">
+                <h4>Contato</h4>
+                <ul>
+                    <li>Rua Isidoro Pedri 263, Jaraguá do Sul, SC</li>
+                    <li>(47) 99231-5311</li>
+                    <li>andrelmiottop@gmail.com.br</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-direitos">
+            <p>&copy; 2025 L’Étoile d’Or. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
 </body>
-</body>
+
 </html>
